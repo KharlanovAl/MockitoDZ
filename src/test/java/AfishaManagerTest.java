@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AfishaManagerTest {
@@ -11,8 +12,7 @@ public class AfishaManagerTest {
         manager.addMovie(movie1);
 
         Movie[] all = manager.findAll();
-        assertEquals(1, all.length);
-        assertEquals(movie1, all[0]);
+        assertArrayEquals(new Movie[]{movie1}, all);
 
         String[] titles = manager.getMovieTitles();
         assertArrayEquals(new String[]{"Джентльмены"}, titles);
@@ -30,10 +30,7 @@ public class AfishaManagerTest {
         manager.addMovie(movie3);
 
         Movie[] all = manager.findAll();
-        assertEquals(3, all.length);
-        assertEquals(movie1, all[0]);
-        assertEquals(movie2, all[1]);
-        assertEquals(movie3, all[2]);
+        assertArrayEquals(new Movie[]{movie1, movie2, movie3}, all);
 
         String[] titles = manager.getMovieTitles();
         assertArrayEquals(new String[]{"Джентльмены", "Отель «Белград»", "Человек-невидимка"}, titles);
@@ -51,10 +48,7 @@ public class AfishaManagerTest {
         manager.addMovie(movie3);
 
         Movie[] last = manager.findLast();
-        assertEquals(3, last.length);
-        assertEquals(movie3, last[0]);
-        assertEquals(movie2, last[1]);
-        assertEquals(movie1, last[2]);
+        assertArrayEquals(new Movie[]{movie3, movie2, movie1}, last);
 
         String[] lastTitles = manager.getLastMovieTitles();
         assertArrayEquals(new String[]{"Человек-невидимка", "Отель «Белград»", "Джентльмены"}, lastTitles);
@@ -72,9 +66,7 @@ public class AfishaManagerTest {
         manager.addMovie(movie3);
 
         Movie[] last = manager.findLast();
-        assertEquals(2, last.length);
-        assertEquals(movie3, last[0]);
-        assertEquals(movie2, last[1]);
+        assertArrayEquals(new Movie[]{movie3, movie2}, last);
 
         String[] lastTitles = manager.getLastMovieTitles();
         assertArrayEquals(new String[]{"Человек-невидимка", "Отель «Белград»"}, lastTitles);
@@ -89,10 +81,10 @@ public class AfishaManagerTest {
         String[] titles = manager.getMovieTitles();
         String[] lastTitles = manager.getLastMovieTitles();
 
-        assertEquals(0, all.length);
-        assertEquals(0, last.length);
-        assertEquals(0, titles.length);
-        assertEquals(0, lastTitles.length);
+        assertArrayEquals(new Movie[]{}, all);
+        assertArrayEquals(new Movie[]{}, last);
+        assertArrayEquals(new String[]{}, titles);
+        assertArrayEquals(new String[]{}, lastTitles);
     }
 
     @Test
@@ -105,10 +97,8 @@ public class AfishaManagerTest {
         Movie[] all = manager.findAll();
         Movie[] last = manager.findLast();
 
-        assertEquals(1, all.length);
-        assertEquals(1, last.length);
-        assertEquals(movie1, all[0]);
-        assertEquals(movie1, last[0]);
+        assertArrayEquals(new Movie[]{movie1}, all);
+        assertArrayEquals(new Movie[]{movie1}, last);
 
         String[] titles = manager.getMovieTitles();
         String[] lastTitles = manager.getLastMovieTitles();
@@ -129,8 +119,6 @@ public class AfishaManagerTest {
         manager.addMovie(movie3);
 
         String[] genres = manager.getMovieGenres();
-
-        assertEquals(3, genres.length);
         assertArrayEquals(new String[]{"боевик", "комедия", "ужасы"}, genres);
     }
 }
